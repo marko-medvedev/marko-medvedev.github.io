@@ -1,0 +1,315 @@
+/* Marko Medvedev — academic homepage
+   Restrained editorial layout: one column, hairline rules, one accent. */
+
+:root {
+  --bg:        #fdfdfb;
+  --panel:     #f5f4f0;
+  --ink:       #17191d;
+  --ink-soft:  #3c4149;
+  --muted:     #6a7078;
+  --rule:      #e4e2dc;
+  --accent:    #1d4e79;
+  --accent-bg: #eaf0f6;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --measure: 42rem;   /* text column */
+  --page:    50rem;   /* full page width incl. gutters */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #14161a;
+    --panel:     #1b1e23;
+    --ink:       #e9e8e4;
+    --ink-soft:  #c6c8cc;
+    --muted:     #949aa4;
+    --rule:      #2a2e35;
+    --accent:    #8ab8e0;
+    --accent-bg: #1c2732;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 1rem; top: 1rem;
+  padding: .5rem .75rem;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s ease, color .15s ease;
+}
+a:hover { border-bottom-color: currentColor; }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.page {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 5.5rem 1.75rem 4rem;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  display: grid;
+  grid-template-columns: 156px 1fr;
+  gap: 2.25rem;
+  align-items: start;
+  padding-bottom: 2.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.portrait {
+  width: 156px;
+  height: 182px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--panel);
+}
+.portrait img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 60% 16%;
+  transform: scale(1.38);
+  transform-origin: 60% 16%;
+  filter: saturate(.96);
+}
+
+.identity h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 5.4vw, 2.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: -0.35rem 0 0.7rem;
+}
+
+.affiliation {
+  margin: 0 0 .55rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.contact {
+  margin: 0 0 1.35rem;
+  color: var(--ink-soft);
+  font-size: .95rem;
+}
+.contact .label {
+  font-size: .72rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: .5rem;
+}
+.contact .email i { font-style: italic; }
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .5rem;
+}
+.links a {
+  font-size: .875rem;
+  line-height: 1;
+  padding: .48rem .72rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  background: transparent;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+/* ---------- sections ---------- */
+
+.section { padding-top: 2.9rem; }
+
+.section-title {
+  font-family: var(--sans);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.35rem;
+  padding-bottom: .55rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.lede {
+  max-width: var(--measure);
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1.03rem;
+  line-height: 1.72;
+}
+
+/* ---------- publications & talks ---------- */
+
+.pubs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pub {
+  position: relative;
+  padding: .85rem 0 .95rem 1.15rem;
+  border-top: 1px solid transparent;
+}
+.pub + .pub { border-top-color: var(--rule); }
+
+.pub::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  width: 3px;
+  height: 0;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: height .18s ease;
+}
+.pub:hover::before { height: calc(100% - 2.1rem); }
+
+.pub-title {
+  font-family: var(--serif);
+  font-size: 1.115rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  margin: 0 0 .3rem;
+  max-width: var(--measure);
+}
+.pub-title a { color: var(--ink); }
+.pub-title a:hover { color: var(--accent); border-bottom-color: transparent; }
+
+.pub-authors {
+  margin: 0 0 .45rem;
+  font-size: .935rem;
+  color: var(--muted);
+  max-width: var(--measure);
+}
+.pub-authors b {
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.pub-meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+}
+
+.venue {
+  font-size: .77rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1;
+  padding: .34rem .55rem;
+  border-radius: 4px;
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+.venue-quiet {
+  color: var(--muted);
+  background: var(--panel);
+  font-weight: 500;
+}
+
+.pill {
+  font-size: .77rem;
+  letter-spacing: .04em;
+  line-height: 1;
+  padding: .33rem .55rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  color: var(--muted);
+}
+.pill:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.bb {
+  font-family: var(--serif);
+  font-style: normal;
+  font-weight: 600;
+  /* blackboard-bold stand-in for the integers */
+  text-shadow: -0.5px 0 currentColor;
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  margin-top: 3.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: .84rem;
+}
+.footer p { margin: 0; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+  body { font-size: 16.5px; }
+  .page { padding: 3rem 1.25rem 3rem; }
+  .masthead {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+  }
+  .portrait { width: 136px; height: 159px; }
+  .identity h1 { margin-top: 0; }
+}
+
+/* ---------- print ---------- */
+
+@media print {
+  :root { --bg: #fff; --ink: #000; --ink-soft: #222; --muted: #444; --rule: #ccc; --accent: #000; --accent-bg: #f2f2f2; }
+  .page { max-width: none; padding: 0; }
+  .links, .skip { display: none; }
+  a { color: #000; }
+  .pub { break-inside: avoid; }
+}

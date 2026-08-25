@@ -1,4 +1,7 @@
-# Optional: server-side 301 for math.uchicago.edu/~medvedev/
-# Only works if the department's Apache config allows .htaccess overrides here.
-# If it does, this takes precedence over index.html and is better for search engines.
-Redirect 301 /~medvedev/ https://marko-medvedev.github.io/
+# Optional server-side 301 for math.uchicago.edu/~medvedev/
+# Place in ~/public_html/ . Only takes effect if the department's Apache config
+# allows .htaccess overrides; harmless if it doesn't.
+#
+# Scoped on purpose: only the directory root and index.html redirect, so
+# Marko_Medvedev_Resume_2025.pdf, img/ and any other file stay reachable.
+RedirectMatch 301 ^/~medvedev/(index\.html)?$ https://marko-medvedev.github.io/

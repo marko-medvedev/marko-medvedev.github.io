@@ -225,6 +225,7 @@ a:focus-visible {
   font-size: 1.03rem;
   line-height: 1.72;
 }
+.lede + .lede { margin-top: 1.15rem; }
 
 /* ---------- publications & talks ---------- */
 

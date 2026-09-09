@@ -225,7 +225,9 @@ a:focus-visible {
   font-size: 1.03rem;
   line-height: 1.72;
 }
-.lede + .lede { margin-top: 1.15rem; }
+/* One full blank line between paragraphs: 1.72em is exactly the .lede
+   line-height, so the gap reads as a skipped line, not a line break. */
+.lede + .lede { margin-top: 1.72em; }
 
 /* ---------- publications & talks ---------- */
 
